@@ -1,0 +1,15 @@
+export const cMin = {
+  NAME: 5,
+  USERNAME: 5,
+  PASSWORD: 8,
+}
+
+export const cMax = {
+  NAME: 30,
+  USERNAME: 30,
+  PASSWORD: 30,
+  NOTEBOOK_NAME: 50,
+  NOTEBOOK_DESCRIPTION: 200,
+  NOTE_NAME: 50,
+  FLASHCARD_TITLE: 50
+}

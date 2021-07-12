@@ -1,26 +1,88 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container-box">
+    <div class="row navbar-area m-0">
+      <div class="col-12 p-0">
+        <Navbar />
+      </div>
+    </div>
+    <div class="row justify-content-center content-area m-0">
+      <div class="col-9 my-3 p-0">
+        <router-view></router-view>
+      </div>
+    </div>
+  </div>
+  <Modal />
+  <Spinner />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Navbar from "./components/navbar.component.vue";
+import Modal from "./containers/modal.container.vue";
+import Spinner from './components/spinner.component.vue';
 
-export default {
-  name: 'App',
+const App = {
   components: {
-    HelloWorld
-  }
-}
+    Navbar,
+    Modal,
+    Spinner
+  },
+};
+
+export default App;
 </script>
 
 <style>
+:root {
+  --bs-primary-color: #80ea6e;
+  --bs-primary-font-color: #808080;
+  --bs-highlight-font-color: #6db33f;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: var(--bs-primary-font-color);
+  width: 100%;
+  height: 100%;
+}
+
+.container-box {
+  width: 100%;
+  height: 100%;
+}
+
+.bg-color-primary {
+  background-color: var(--bs-primary-color);
+}
+
+.btn-outline-primary-color {
+  color: var(--bs-highlight-font-color) !important;
+  border-color: var(--bs-primary-color) !important;
+}
+
+.btn-outline-primary-color:hover {
+  color: #fff !important;
+  background-color: var(--bs-primary-color);
+}
+
+.highlight {
+  color: var(--bs-highlight-font-color) !important;
+}
+</style>
+
+<style scoped>
+.navbar-area {
+  height: 10%;
+}
+
+.content-area {
+  height: 90%;
 }
 </style>
