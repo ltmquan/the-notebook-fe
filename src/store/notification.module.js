@@ -3,7 +3,7 @@ export const notification = {
   state: {
     text: '',
     type: '',
-    showing: true
+    showing: false
   },
   getters: {
     text(state) {

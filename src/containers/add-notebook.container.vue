@@ -5,27 +5,26 @@
 </template>
 
 <script>
-import notebookService from '../services/notebook.service';
-import AddNotebookForm from '../components/add-notebook-form.component.vue';
-import responseHandler from '../utils/response.handler';
+import notebookService from "../services/notebook.service";
+import AddNotebookForm from "../components/add-notebook-form.component.vue";
+import responseHandler from "../utils/response.handler";
 
 const AddNotebook = {
   components: {
-    AddNotebookForm
+    AddNotebookForm,
   },
-  emits: ['finish'],
+  emits: ["finish"],
   methods: {
     addNotebook(notebook) {
-      notebookService.create(notebook).then(
-        response => {
-          this.$emit('finish');
-          this.$store.dispatch('modal/close');
-          responseHandler.handlePostResponse(this.$store, response);
-        }
-      )
-    }
+      notebookService.create(notebook).then((response) => {
+        responseHandler.handlePostResponse(this.$store, response, (param) => {
+          this.$emit("finish");
+          this.$store.dispatch("modal/close");
+        });
+      });
+    },
   },
-}
+};
 
 export default AddNotebook;
 </script>

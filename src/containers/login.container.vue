@@ -24,8 +24,9 @@ const Login = {
         .then(
           response => {
             this.$store.dispatch('spinner/hide');
-            this.$router.push('/');
-            responseHandler.handlePostResponse(this.$store, response);
+            responseHandler.handlePostResponse(this.$store, response, (param) => {
+              this.$router.push('/');
+            });
           },
         )
     }
