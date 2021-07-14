@@ -7,6 +7,7 @@
 <script>
 import authService from '../services/auth.service';
 import SignupForm from '../components/signup-form.component.vue';
+import responseHandler from '../utils/response.handler';
 
 const Signup = {
   components: {
@@ -17,10 +18,10 @@ const Signup = {
       this.$store.dispatch('spinner/show');
       authService.register(user)
         .then(
-          () => {
+          response => {
             this.$store.dispatch('spinner/hide');
             this.$router.push('/');
-            console.log('signup success');
+            responseHandler.handlePostResponse(this.$store, response);
           }
         )
     }

@@ -14,7 +14,12 @@
         <div>{{ notebook.name }}</div>
       </div>
       <div
-        class="notebook-group notebook-add col-4 justify-content-center text-center"
+        class="
+          notebook-group notebook-add
+          col-4
+          justify-content-center
+          text-center
+        "
         @click="addNotebook()"
       >
         <font-awesome-icon icon="plus-circle" class="notebook-icon" />
@@ -25,10 +30,11 @@
 </template>
 
 <script>
-// import notebookService from "../services/notebook.service";
-import Breadcrumb from '../components/breadcrumb.component.vue';
+import notebookService from "../services/notebook.service";
+import Breadcrumb from "../components/breadcrumb.component.vue";
 import TitleText from "../components/title-text.component.vue";
-import AddNotebook from './add-notebook.container.vue';
+import AddNotebook from "./add-notebook.container.vue";
+import responseHandler from "../utils/response.handler";
 
 const Collections = {
   components: {
@@ -41,61 +47,37 @@ const Collections = {
       notebooks: null,
     };
   },
-  computed: {
-    hasData() {
-      return this.breadcrumb && this.notebooks;
-    }
-  },
   methods: {
     loadBreadcrumb() {
-      this.breadcrumb = [
-        { name: 'Home', link: '/'}
-      ]
+      this.breadcrumb = [{ name: "Home", link: "/" }];
     },
     loadNotebooks() {
-      // notebookService.getByCurrentUser().then((response) => {
-      //   this.notebooks = response;
-      // });
-      this.notebooks = [
-        {
-          id: 1,
-          name: "Notebook 1"
-        },
-        {
-          id: 2,
-          name: "Notebook 2"
-        },
-        {
-          id: 3,
-          name: "Notebook 3"
-        },
-        {
-          id: 4,
-          name: "Notebook 4"
-        },
-      ]
+      this.$store.dispatch("spinner/show");
+      notebookService.getByCurrentUser().then((response) => {
+        this.$store.dispatch("spinner/hide");
+        responseHandler.handleGetResponse(this.$store, response, (notebooks) => {
+          this.notebooks = notebooks;
+        })
+      });
     },
     toNotebook(id) {
       this.$router.push(`/collections/${id}`);
     },
     addNotebook() {
-      this.$store.dispatch('modal/open', {
-        component: AddNotebook, 
-        title: "Add notebook", 
-        props: {}
+      this.$store.dispatch("modal/open", {
+        component: AddNotebook,
+        title: "Add notebook",
+        props: {},
+        callback: () => {
+          this.loadNotebooks();
+        },
       });
-    }
+    },
   },
   created() {
-    this.$store.dispatch('spinner/show');
     this.loadBreadcrumb();
     this.loadNotebooks();
   },
-  mounted() {
-    if (this.hasData) {
-      this.$store.dispatch('spinner/hide');
-    }
-  }
 };
 
 export default Collections;

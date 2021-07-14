@@ -6,6 +6,7 @@
 
 <script>
 import LoginForm from '../components/login-form.component.vue';
+import responseHandler from '../utils/response.handler';
 
 const Login = {
   components: {
@@ -21,11 +22,11 @@ const Login = {
       this.$store.dispatch('spinner/show');
       this.$store.dispatch('auth/login', user)
         .then(
-          () => {
+          response => {
             this.$store.dispatch('spinner/hide');
             this.$router.push('/');
-            console.log('login success');
-          }
+            responseHandler.handlePostResponse(this.$store, response);
+          },
         )
     }
   },

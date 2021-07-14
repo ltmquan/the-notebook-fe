@@ -1,6 +1,10 @@
 <template>
   <div class="component-box notebook shadow-sm">
-    <Breadcrumb v-if="breadcrumb && notebook" :path="breadcrumb" :current="notebook.name" />
+    <Breadcrumb
+      v-if="breadcrumb && notebook"
+      :path="breadcrumb"
+      :current="notebook.name"
+    />
     <TitleText v-if="notebook" :title="notebook.name" />
 
     <p v-if="notebook" class="fst-italic">
@@ -29,9 +33,10 @@
 </template>
 
 <script>
-// import notebookService from "../services/notebook.service";
-// import noteService from "../services/note.service";
-import Breadcrumb from '../components/breadcrumb.component.vue';
+import responseHandler from "../utils/response.handler";
+import notebookService from "../services/notebook.service";
+import noteService from "../services/note.service";
+import Breadcrumb from "../components/breadcrumb.component.vue";
 import TitleText from "../components/title-text.component.vue";
 
 const Notebook = {
@@ -49,52 +54,32 @@ const Notebook = {
   computed: {
     hasData() {
       return this.breadcrumb && this.notebook && this.notes;
-    }
+    },
   },
   methods: {
     loadBreadcrumb() {
       this.breadcrumb = [
-        { name: 'Home', link: '/'},
-        { name: 'Collections', link: '/collections'},
-      ]
+        { name: "Home", link: "/" },
+        { name: "Collections", link: "/collections" },
+      ];
     },
     loadNotebook() {
-      // notebookService.getById(this.$route.params.id).then(
-      //   response => {
-      //     this.notebook = response;
-      //   }
-      // )
-      this.notebook = {
-        id: 1,
-        name: "Microservices",
-        description:
-          "Basic definitions and concepts of the Microservices architecture.",
-      };
+      this.$store.dispatch("spinner/show");
+      notebookService.getById(this.$route.params.id).then((response) => {
+        this.$store.dispatch("spinner/hide");
+        responseHandler.handleGetResponse(this.$store, response, (notebook) => {
+          this.notebook = notebook;
+        });
+      });
     },
     loadNotes() {
-      // noteService.getByNotebookId(this.$route.params.id).then(
-      //   response => {
-      //     this.notes = response;
-      //   }
-      // )
-      this.notes = [
-        {
-          id: 1,
-          name: "Definition",
-        },
-        {
-          id: 2,
-          name: "History",
-        },
-        {
-          id: 3,
-          name: "Benefits",
-        },
-        {
-          id: 4,
-          name: "Best Design Patterns",
-        },
-      ];
+      this.$store.dispatch("spinner/show");
+      noteService.getByNotebookId(this.$route.params.id).then((response) => {
+        this.$store.dispatch("spinner/hide");
+        responseHandler.handleGetResponse(this.$store, response, (notes) => {
+          this.notes = notes;
+        });
+      });
     },
     toNote(id) {
       this.$router.push(`/note/${id}`);
@@ -104,16 +89,10 @@ const Notebook = {
     },
   },
   created() {
-    this.$store.dispatch('spinner/show');
     this.loadBreadcrumb();
     this.loadNotebook();
     this.loadNotes();
   },
-  mounted() {
-    if (this.hasData) {
-      this.$store.dispatch('spinner/hide');
-    }
-  }
 };
 
 export default Notebook;

@@ -1,6 +1,6 @@
 <template>
   <ModalContent :isOpen="!!component" :title="title" @close="close">
-    <component :is="component" v-bind="props" />
+    <component :is="component" v-bind="props" @finish="callback" />
   </ModalContent>
 </template>
 
@@ -25,6 +25,9 @@ const Modal = {
     },
     props() {
       return this.$store.getters['modal/props'];
+    },
+    callback() {
+      return this.$store.getters['modal/callback'];
     }
   },
   created() {

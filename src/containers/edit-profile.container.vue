@@ -7,6 +7,7 @@
 <script>
 import userService from '../services/user.service';
 import EditProfileForm from '../components/edit-profile-form.component.vue';
+import responseHandler from '../utils/response.handler';
 
 const EditProfile = {
   components: {
@@ -16,11 +17,11 @@ const EditProfile = {
     editProfile(user) {
       this.$store.dispatch('spinner/show');
       userService.update(user).then(
-        () => {
+        response => {
           this.$store.dispatch('spinner/hide');
           this.$store.dispatch('auth/updateState');
-          console.log('edit success');
           this.$store.dispatch('modal/close');
+          responseHandler.handlePutResponse(this.$store, response);
         }
       )
     }

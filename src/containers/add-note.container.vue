@@ -17,3 +17,12 @@ const AddNote = {
 
 export default AddNote
 </script>
+
+<style scoped>
+.add-note {
+  width: 70%;
+  padding: 5%;
+  margin: 2% auto;
+  border-radius: 10px;
+}
+</style>

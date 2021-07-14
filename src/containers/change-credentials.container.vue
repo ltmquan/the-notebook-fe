@@ -7,6 +7,7 @@
 <script>
 import userService from '../services/user.service';
 import ChangeCredentialsForm from '../components/change-credentials-form.component.vue';
+import responseHandler from '../utils/response.handler';
 
 const ChangeCredentials = {
   components: {
@@ -16,11 +17,11 @@ const ChangeCredentials = {
     changeCredentials(request) {
       this.$store.dispatch('spinner/show');
       userService.changeCredentials(request).then(
-        () => {
+        response => {
           this.$store.dispatch('spinner/hide');
           this.$store.dispatch('auth/updateState');
-          console.log('change success');
           this.$store.dispatch('modal/close');
+          responseHandler.handlePutResponse(this.$store, response);
         }
       )
     }

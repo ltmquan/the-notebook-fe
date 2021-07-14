@@ -1,3 +1,4 @@
+import { status } from '../constants/api-response.constant';
 import authService from '../services/auth.service';
 import userService from '../services/user.service';
 
@@ -23,7 +24,9 @@ export const auth = {
       return authService.login(user)
         .then(
           response => {
-            commit('login', response);
+            if (response.status === status.SUCCESS) {
+              commit('login', response);
+            }
             return Promise.resolve(response);
           }
         );
@@ -31,8 +34,9 @@ export const auth = {
     logout({ commit }) {
       userService.logout()
         .then(
-          () => {
+          response => {
             commit('logout');
+            return Promise.resolve(response);
           }
         );
     },

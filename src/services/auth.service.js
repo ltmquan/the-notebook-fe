@@ -1,6 +1,7 @@
 import axios from "axios";
+import { status } from "../constants/api-response.constant";
 import { BASE_URL, endpoints } from "../constants/url.constant";
-import serviceUtil from "../utils/service.util";
+import requestHandler from "../utils/request.handler";
 
 const AUTH_URL = BASE_URL + endpoints.AUTH;
 
@@ -12,22 +13,21 @@ class AuthService {
         response => {
           if (response.data.accessToken) {
             localStorage.setItem('user', JSON.stringify(response.data));
+
+            return {
+              status: status.SUCCESS,
+              action: 'sign in',
+              entity: 'user'
+            }
           }
 
           return response.data;
         }
       )
-      .catch(
-        error => {
-          console.log(error);
-        }
-      );
   }
 
   register(user) {
-    console.log(user);
-
-    return serviceUtil.handlePostResponse(AUTH_URL + '/signup', user, {});
+    return requestHandler.sendPostRequest(AUTH_URL + '/signup', user, {});
   }
 }
 

@@ -3,7 +3,8 @@ export const modal = {
   state: {
     component: null,
     title: '',
-    props: null
+    props: null,
+    callback: null
   },
   getters: {
     component(state) {
@@ -14,26 +15,31 @@ export const modal = {
     },
     props(state) {
       return state.props;
+    },
+    callback(state) {
+      return state.callback;
     } 
   },
   actions: {
-    open({ commit }, { component, title, props }) {
-      commit('open', { component, title, props });
+    open({ commit }, { component, title, props, callback }) {
+      commit('open', { component, title, props, callback });
     },
     close({ commit }) {
       commit('close');
     }
   },
   mutations: {
-    open(state, { component, title, props }) {
+    open(state, { component, title, props, callback }) {
       state.component = component;
       state.title = title;
       state.props = props;
+      state.callback = callback;
     },
     close(state) {
       state.component = null;
       state.title = '';
       state.props = null;
+      state.callback = null;
     }
   }
 }

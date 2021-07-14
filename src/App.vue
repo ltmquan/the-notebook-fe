@@ -13,18 +13,21 @@
   </div>
   <Modal />
   <Spinner />
+  <Notification />
 </template>
 
 <script>
 import Navbar from "./components/navbar.component.vue";
 import Modal from "./containers/modal.container.vue";
 import Spinner from './components/spinner.component.vue';
+import Notification from './components/notification.component.vue';
 
 const App = {
   components: {
     Navbar,
     Modal,
-    Spinner
+    Spinner,
+    Notification
   },
 };
 
@@ -51,6 +54,16 @@ body {
   color: var(--bs-primary-font-color);
   width: 100%;
   height: 100%;
+}
+
+.ck {
+  border: none !important;
+}
+
+.ck-focused {
+  border: none !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
 .container-box {
