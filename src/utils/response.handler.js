@@ -4,7 +4,7 @@ import notificationUtil from "./notification.util";
 class ResponseHandler {
 
   // GET
-  handleGetResponse(store, response, successCallback = (param) => {}, failureCallback = (param) => {}) {
+  handleGetResponse(store, response, successCallback = (param) => { }, failureCallback = (param) => { }) {
     if (response.status && response.status === status.FAILURE) {
       store.dispatch('notification/show', {
         type: response.status,
@@ -12,16 +12,12 @@ class ResponseHandler {
       });
       failureCallback(response);
     } else {
-      store.dispatch('notification/show', {
-        type: status.SUCCESS,
-        text: 'Successfully able to retrieve requested data'
-      })
       successCallback(response);
     }
   }
 
   // POST
-  handlePostResponse(store, response, successCallback = (param) => {}, failureCallback = (param) => {}) {
+  handlePostResponse(store, response, successCallback = (param) => { }, failureCallback = (param) => { }) {
     store.dispatch('notification/show', {
       type: response.status,
       text: notificationUtil.generateMessageFromResponse(response)
@@ -32,7 +28,7 @@ class ResponseHandler {
   }
 
   // PUT
-  handlePutResponse(store, response, successCallback = (param) => {}, failureCallback = (param) => {}) {
+  handlePutResponse(store, response, successCallback = (param) => { }, failureCallback = (param) => { }) {
     store.dispatch('notification/show', {
       type: response.status,
       text: notificationUtil.generateMessageFromResponse(response)
@@ -42,8 +38,8 @@ class ResponseHandler {
     else failureCallback(response);
   }
 
-  // POST
-  handleDeleteResponse(store, response, successCallback = (param) => {}, failureCallback = (param) => {}) {
+  // DELETE
+  handleDeleteResponse(store, response, successCallback = (param) => { }, failureCallback = (param) => { }) {
     store.dispatch('notification/show', {
       type: response.status,
       text: notificationUtil.generateMessageFromResponse(response)

@@ -17,7 +17,7 @@ class AuthService {
             return {
               status: status.SUCCESS,
               action: 'log in',
-              entity: 'user'
+              entityName: 'user'
             }
           }
 

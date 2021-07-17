@@ -8,8 +8,9 @@ const USER_URL = BASE_URL + endpoints.USER;
 
 class UserService {
   logout() {
+    const header = authHeader();
     localStorage.removeItem('user');
-    return requestHandler.sendGetRequest(USER_URL + '/logout', authHeader());
+    return requestHandler.sendGetRequest(USER_URL + '/logout', header);
   }
 
   update(user) {

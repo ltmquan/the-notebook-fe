@@ -17,10 +17,10 @@
 </template>
 
 <script>
-import Navbar from "./components/navbar.component.vue";
-import Modal from "./containers/modal.container.vue";
-import Spinner from './components/spinner.component.vue';
-import Notification from './components/notification.component.vue';
+import Navbar from "./components/navbar/navbar.component.vue";
+import Modal from "./containers/modal/modal.container.vue";
+import Spinner from './components/spinner/spinner.component.vue';
+import Notification from './components/notification/notification.component.vue';
 
 const App = {
   components: {
@@ -87,6 +87,10 @@ body {
 
 .highlight {
   color: var(--bs-highlight-font-color) !important;
+}
+
+.break-word {
+  word-wrap: break-word;
 }
 </style>
 
