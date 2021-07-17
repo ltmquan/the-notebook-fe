@@ -66,8 +66,6 @@ const LoginForm = {
           username: this.username,
           password: this.password,
         });
-      } else {
-        console.log("has error");
       }
     },
   },

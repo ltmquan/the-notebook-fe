@@ -29,6 +29,14 @@ class AuthService {
   register(user) {
     return requestHandler.sendPostRequest(AUTH_URL + '/signup', user, {});
   }
+
+  sendResetPasswordEmail(email) {
+    return requestHandler.sendPostRequest(AUTH_URL + '/forgot-password/email', email, {});
+  }
+
+  resetPasswordWithOtp(request) {
+    return requestHandler.sendPostRequest(AUTH_URL + '/forgot-password/otp', request, {});
+  }
 }
 
 export default new AuthService();
