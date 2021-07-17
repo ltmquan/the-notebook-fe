@@ -14,8 +14,8 @@
           </router-link>
         </li>
         <li v-if="loggedIn" class="nav-item mx-1">
-          <router-link to="/collections" class="nav-link">
-            <font-awesome-icon icon="book" /> Flashcards
+          <router-link to="/flashcard" class="nav-link">
+            <font-awesome-icon icon="sticky-note" /> Flashcards
           </router-link>
         </li>
       </div>
@@ -47,6 +47,9 @@
 </template>
 
 <script>
+import notificationUtil from "../../utils/notification.util";
+import responseHandler from "../../utils/response.handler";
+
 const Navbar = {
   data() {
     return {};
@@ -58,15 +61,18 @@ const Navbar = {
   },
   methods: {
     signout() {
-      this.$store.dispatch('spinner/show');
-      this.$store.dispatch('auth/logout').then(
-        () => {
-          this.$store.dispatch('spinner/hide');
-          console.log('logout success');
-        }
-      )
-    }
-  }
+      this.$store.dispatch("spinner/show");
+      this.$store.dispatch("auth/logout").then((response) => {
+        this.$store.dispatch("spinner/hide");
+        responseHandler.handleGetResponse(this.$store, response, (param) => {
+          this.$store.dispatch("notification/show", {
+            type: param.status,
+            text: notificationUtil.generateMessageFromResponse(param),
+          });
+        });
+      });
+    },
+  },
 };
 
 export default Navbar;

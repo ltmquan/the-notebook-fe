@@ -3,7 +3,11 @@
     <Breadcrumb :current="title" />
     <TitleText :title="title" />
 
-    <CollectionsList v-if="notebooks" :notebooks="notebooks" />
+    <CollectionsList
+      v-if="notebooks"
+      :notebooks="notebooks"
+      @add-notebook="addNotebook"
+    />
   </div>
 </template>
 
@@ -11,7 +15,8 @@
 import notebookService from "../../services/notebook.service";
 import Breadcrumb from "../../components/breadcrumb/breadcrumb.component.vue";
 import TitleText from "../../components/text/title-text.component.vue";
-import CollectionsList from '../../components/notebook/collections-list.component.vue';
+import CollectionsList from "../../components/notebook/collections-list.component.vue";
+import AddNotebook from "../../components/modal/add-notebook-form.component.vue";
 import responseHandler from "../../utils/response.handler";
 import { title } from "../../constants/page.constant";
 
@@ -19,7 +24,7 @@ const Collections = {
   components: {
     Breadcrumb,
     TitleText,
-    CollectionsList
+    CollectionsList,
   },
   data() {
     return {
@@ -29,16 +34,30 @@ const Collections = {
   computed: {
     title() {
       return title.COLLECTIONS;
-    }
+    },
   },
   methods: {
     loadNotebooks() {
       this.$store.dispatch("spinner/show");
       notebookService.getByCurrentUser().then((response) => {
         this.$store.dispatch("spinner/hide");
-        responseHandler.handleGetResponse(this.$store, response, (notebooks) => {
-          this.notebooks = notebooks;
-        })
+        responseHandler.handleGetResponse(
+          this.$store,
+          response,
+          (notebooks) => {
+            this.notebooks = notebooks;
+          }
+        );
+      });
+    },
+    addNotebook() {
+      this.$store.dispatch("modal/open", {
+        component: AddNotebook,
+        title: "Add notebook",
+        props: {},
+        callback: () => {
+          this.loadNotebooks();
+        },
       });
     },
   },

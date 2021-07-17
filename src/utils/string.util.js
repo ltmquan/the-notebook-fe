@@ -1,6 +1,6 @@
 class StringUtil {
   toKey(str) {
-    return str.toUpperCase().split(/\s+/).join("");
+    return str.toUpperCase().split(/\s+/).join("_");
   }
 }
 

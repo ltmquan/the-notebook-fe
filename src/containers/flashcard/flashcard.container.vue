@@ -1,7 +1,7 @@
 <template>
   <div class="component-box flashcard shadow-sm">
-    <TitleText :title="title" />
     <Breadcrumb :current="title" />
+    <TitleText :title="title" />
 
     <FlashcardInfo />
   </div>
@@ -11,12 +11,18 @@
 import TitleText from '../../components/text/title-text.component.vue';
 import Breadcrumb from '../../components/breadcrumb/breadcrumb.component.vue';
 import FlashcardInfo from '../../components/flashcard/flashcard-info.component.vue';
+import { title } from '../../constants/page.constant';
 
 const Flashcard = {
   components: {
     TitleText,
     Breadcrumb,
     FlashcardInfo
+  },
+  computed: {
+    title() {
+      return title.FLASHCARD;
+    }
   }
 }
 

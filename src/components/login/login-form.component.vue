@@ -2,6 +2,7 @@
   <form class="login-form" @submit="login">
     <TextInput
       label="Username"
+      :autofocus="true"
       :required="true"
       :value="username"
       :message="vUsername"
@@ -24,6 +25,11 @@
 
     <input type="submit" class="btn btn-outline-primary-color" />
   </form>
+
+  <p class="fst-italic mt-2 form-text">
+    If you haven't signed up, click here
+    <router-link to="/signup">Sign Up</router-link>
+  </p>
 </template>
 
 <script>
@@ -41,7 +47,7 @@ const LoginForm = {
     return {
       username: "",
       password: "",
-      loggingIn: false,
+      loggingIn: false,  
     };
   },
   computed: {

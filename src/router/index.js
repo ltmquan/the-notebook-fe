@@ -1,14 +1,15 @@
 import { createWebHistory, createRouter } from "vue-router";
-const Home = () => import('../containers/home.container.vue');
-const Login = () => import('../containers/login.container.vue');
-const Signup = () => import('../containers/signup.container.vue');
-const ForgotPassword = () => import('../containers/forgot-password.container.vue');
-const Settings = () => import('../containers/settings.container.vue');
-const Profile = () => import('../containers/profile.container.vue');
-const Collections = () => import('../containers/collections.container.vue');
-const Notebook = () => import('../containers/notebook.container.vue');
-const Note = () => import('../containers/note.container.vue');
-const AddNote = () => import('../containers/add-note.container.vue');
+const Home = () => import('../containers/home/home.container.vue');
+const Login = () => import('../containers/login/login.container.vue');
+const Signup = () => import('../containers/signup/signup.container.vue');
+const ForgotPassword = () => import('../containers/login/forgot-password.container.vue');
+const Settings = () => import('../containers/settings/settings.container.vue');
+const Profile = () => import('../containers/settings/profile.container.vue');
+const Collections = () => import('../containers/notebook/collections.container.vue');
+const Notebook = () => import('../containers/notebook/notebook.container.vue');
+const Note = () => import('../containers/note/note.container.vue');
+const AddNote = () => import('../containers/note/add-note.container.vue');
+const Flashcard = () => import('../containers/flashcard/flashcard.container.vue');
 
 const routes = [
   {
@@ -61,6 +62,11 @@ const routes = [
     path: '/note/add-note',
     name: 'Add Note',
     component: AddNote
+  },
+  {
+    path: '/flashcard',
+    name: "Flashcard",
+    component: Flashcard
   }
 ]
 

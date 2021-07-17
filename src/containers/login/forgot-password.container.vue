@@ -3,7 +3,7 @@
     <Breadcrumb :current="title" />
     <TitleText :title="title" />
 
-    <ForgotPasswordForm :sentEmail="sentEmail" @sendEmail="sendEmail" @verify="verify" />
+    <ForgotPasswordForm :sentEmail="true" @send-email="sendEmail" @verify="verify" />
   </div>
 </template>
 

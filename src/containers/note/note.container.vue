@@ -30,6 +30,8 @@
     <div class="text-editor">
       <ckeditor :editor="editor" v-model="content" />
     </div>
+
+    <button class="btn btn-outline-primary-color" @click="save">Save</button>
   </div>
 </template>
 
@@ -81,6 +83,9 @@ const Note = {
     toggleEditTitle() {
       this.editTitle = !this.editTitle;
     },
+    save() {
+      console.log(this.content);
+    }
   },
   created() {
     this.loadNote();

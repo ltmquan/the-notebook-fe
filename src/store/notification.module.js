@@ -9,6 +9,9 @@ export const notification = {
     text(state) {
       return state.text;
     },
+    type(state) {
+      return state.type;
+    },
     showing(state) {
       return state.showing;
     },

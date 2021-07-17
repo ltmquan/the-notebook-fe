@@ -10,9 +10,14 @@ import {
   faFileAlt,
   faPlusCircle,
   faPencilAlt,
-  faTimes
+  faTimes,
+  faTimesCircle,
+  faCheckCircle,
+  faExclamationTriangle,
+  faExclamationCircle,
+  faStickyNote
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faHome, faBook, faUser, faSignInAlt, faSignOutAlt, faCog, faFileAlt, faPlusCircle, faPencilAlt, faTimes);
+library.add(faHome, faBook, faUser, faSignInAlt, faSignOutAlt, faCog, faFileAlt, faPlusCircle, faPencilAlt, faTimes, faTimesCircle, faCheckCircle, faExclamationTriangle, faExclamationCircle, faStickyNote);
 
 export { FontAwesomeIcon };

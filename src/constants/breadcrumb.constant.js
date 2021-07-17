@@ -40,7 +40,7 @@ export const APP_TREE = [
     ]
   },
   {
-    name: "Login",
+    name: "Log in",
     link: "/login",
     children: [
       {
@@ -50,7 +50,7 @@ export const APP_TREE = [
     ]
   },
   {
-    name: "Signup",
+    name: "Sign up",
     link: "/signup"
   }
 ]
@@ -61,9 +61,10 @@ export const appTreeDirectory = {
   NOTEBOOK: [0, 0, 0],
   NOTE: [0, 0, 0, 0],
   ADD_NOTE: [0, 0, 0, 1],
-  SETTINGS: [0, 1],
+  FLASHCARD: [0, 1],
+  SETTINGS: [0, 2],
   PROFILE: [0, 1, 0],
-  LOGIN: [1],
+  LOG_IN: [1],
   FORGOT_PASSWORD: [1, 0],
-  SIGNUP: [2],
+  SIGN_UP: [2],
 }

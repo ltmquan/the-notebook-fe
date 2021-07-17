@@ -1,8 +1,12 @@
 <template>
+  <p v-if="!sentEmail" class="fst-italic">Please enter your email and we'll send you an OTP code to reset your password.</p>
+  <p v-else class="fst-italic">Please enter your OTP code to reset your password.</p>
+
   <form v-if="!sentEmail" @submit="sendEmail">
     <EmailInput
       label="Email"
       :required="true"
+      :autofocus="true"
       :value="email"
       :message="vEmail"
       @input="email = $event"
@@ -15,6 +19,7 @@
     <TextInput
       label="OTP Code"
       :required="true"
+      :autofocus="true"
       :value="otp"
       :message="vOtp"
       @input="otp = $event"
@@ -54,10 +59,12 @@ const ForgotPasswordForm = {
     PasswordInput,
   },
   emits: ["sendEmail", "verify"],
+  props: {
+    sentEmail: Boolean
+  },
   data() {
     return {
       email: "",
-      sentEmail: false,
       otp: "",
       newPassword: "",
       confirmNewPassword: "",

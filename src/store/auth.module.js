@@ -32,11 +32,12 @@ export const auth = {
         );
     },
     logout({ commit }) {
-      userService.logout()
+      return userService.logout()
         .then(
           response => {
             commit('logout');
-            return Promise.resolve(response);
+            
+            return response;
           }
         );
     },

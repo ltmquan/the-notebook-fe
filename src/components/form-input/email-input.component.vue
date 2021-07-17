@@ -4,7 +4,7 @@
       {{ label }}
       <span v-if="required" class="text-danger">*</span>
     </label>
-    <input type="email" class="form-control" @input="onInput" :value="value" />
+    <input ref="input" type="email" class="form-control" @input="onInput" :value="value" />
     <div class="form-text text-danger">{{ message }}</div>
   </div>
 </template>
@@ -16,11 +16,17 @@ const EmailInput = {
     required: Boolean,
     label: String,
     value: String,
-    message: String
+    message: String,
+    autofocus: Boolean
   },
   methods: {
     onInput(event) {
       this.$emit('input', event.target.value);
+    }
+  },
+  mounted() {
+    if (this.autofocus) {
+      this.$refs.input.focus();
     }
   }
 }

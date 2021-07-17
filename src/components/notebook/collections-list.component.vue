@@ -26,6 +26,7 @@
 
 <script>
 const CollectionsList = {
+  emits: ['addNotebook'],
   props: {
     notebooks: Array
   },
@@ -34,14 +35,7 @@ const CollectionsList = {
       this.$router.push(`/collections/${id}`);
     },
     addNotebook() {
-      this.$store.dispatch("modal/open", {
-        component: AddNotebook,
-        title: "Add notebook",
-        props: {},
-        callback: () => {
-          this.loadNotebooks();
-        },
-      });
+      this.$emit('addNotebook');
     },
   }
 }

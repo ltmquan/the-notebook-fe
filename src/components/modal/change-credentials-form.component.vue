@@ -3,6 +3,7 @@
     <TextInput
       label="Username"
       :required="true"
+      :autofocus="true"
       :value="username"
       :message="vUsername"
       @input="username = $event"
