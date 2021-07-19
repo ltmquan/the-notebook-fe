@@ -39,10 +39,10 @@ export default App;
   --bs-primary-color: #80ea6e;
   --bs-primary-font-color: #808080;
   --bs-highlight-font-color: #6db33f;
-  --bs-danger-color: #f32013;
-  --bs-success-color: #4bb543;
-  --bs-info-color: #c0c0c0;
-  --bs-warning-color: #fad000;
+  --bs-danger-color: #f8d7da;
+  --bs-success-color: #d4edda;
+  --bs-info-color: #e2e3e5;
+  --bs-warning-color: #fff3cd;
 }
 
 html,

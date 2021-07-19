@@ -9,16 +9,12 @@ export const APP_TREE = [
         children: [
           {
             name: "Notebook",
-            link: "/collections/notebookId",
+            link: "/notebook/:notebookId",
             children: [
               {
                 name: "Note",
-                link: "/note/noteId"
+                link: "/notebook/:notebookId/note/:noteId"
               },
-              {
-                name: "New Note",
-                link: "/note/add-note"
-              }
             ]
           }
         ]
@@ -60,7 +56,6 @@ export const appTreeDirectory = {
   COLLECTIONS: [0, 0],
   NOTEBOOK: [0, 0, 0],
   NOTE: [0, 0, 0, 0],
-  ADD_NOTE: [0, 0, 0, 1],
   FLASHCARD: [0, 1],
   SETTINGS: [0, 2],
   PROFILE: [0, 1, 0],

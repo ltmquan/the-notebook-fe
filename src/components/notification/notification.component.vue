@@ -80,17 +80,21 @@ export default Notification;
 
 .error {
   background-color: var(--bs-danger-color);
+  color: #721c24;
 }
 
 .success {
   background-color: var(--bs-success-color);
+  color: #155724;
 }
 
 .info {
   background-color: var(--bs-info-color);
+  color: #383d41;
 }
 
 .warning {
   background-color: var(--bs-warning-color);
+  color: #856404;
 }
 </style>

@@ -8,7 +8,6 @@ const Profile = () => import('../containers/settings/profile.container.vue');
 const Collections = () => import('../containers/notebook/collections.container.vue');
 const Notebook = () => import('../containers/notebook/notebook.container.vue');
 const Note = () => import('../containers/note/note.container.vue');
-const AddNote = () => import('../containers/note/add-note.container.vue');
 const Flashcard = () => import('../containers/flashcard/flashcard.container.vue');
 
 const routes = [
@@ -49,19 +48,14 @@ const routes = [
     component: Collections
   },
   {
-    path: '/collections/:id',
+    path: '/notebook/:id',
     name: 'Notebook',
     component: Notebook
   },
   {
-    path: '/note/:id',
+    path: '/notebook/:notebookId/note/:id',
     name: 'Note',
     component: Note
-  },
-  {
-    path: '/note/add-note',
-    name: 'Add Note',
-    component: AddNote
   },
   {
     path: '/flashcard',

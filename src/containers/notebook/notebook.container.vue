@@ -58,7 +58,6 @@ const Notebook = {
     },
   },
   created() {
-    this.loadBreadcrumb();
     this.loadNotebook();
     this.loadNotes();
   },

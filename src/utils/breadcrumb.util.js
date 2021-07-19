@@ -2,7 +2,7 @@ import { appTreeDirectory, APP_TREE } from "../constants/breadcrumb.constant";
 import stringUtil from "./string.util";
 
 class BreadcrumbUtil {
-  generateBreadcrumbPath(name) {
+  generateBreadcrumbPath(name, directory) {
     let breadcrumb = [];
 
     const path = appTreeDirectory[stringUtil.toKey(name)];
@@ -19,10 +19,14 @@ class BreadcrumbUtil {
 
     for (let i = 1; i < path.length-1; i++) {
       pointer = pointer.children[path[i]];
-      breadcrumb.push({
-        name: pointer.name,
-        link: pointer.link
-      });
+      if (directory[pointer.name]) {
+        breadcrumb.push(directory[pointer.name]);
+      } else {
+        breadcrumb.push({
+          name: pointer.name,
+          link: pointer.link
+        });
+      }
     }
 
     return breadcrumb;

@@ -75,12 +75,14 @@ ClassicEditor.defaultConfig = {
   },
   image: {
     toolbar: [
-      "imageStyle:full",
-      "imageStyle:side"
+      "imageStyle:alignLeft",
+      "imageStyle:alignCenter",
+      "imageStyle:alignRight",
     ],
     styles: [
-      "full",
-      "side"
+      "alignLeft",
+      "alignCenter",
+      "alignRight",
     ] 
   },
   placeholder: "Enter your content"

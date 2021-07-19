@@ -16,11 +16,12 @@ import breadcrumbUtil from '../../utils/breadcrumb.util';
 
 const Breadcrumb = {
   props: {
-    current: String
+    current: String,
+    directory: Object
   },
   computed: {
     path() {
-      return breadcrumbUtil.generateBreadcrumbPath(this.current);
+      return breadcrumbUtil.generateBreadcrumbPath(this.current, this.directory ? this.directory : {});
     }
   }
 };

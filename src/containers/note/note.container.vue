@@ -1,13 +1,13 @@
 <template>
   <div class="component-box note shadow-sm">
-    <Breadcrumb :current="title" />
+    <Breadcrumb :current="title" :directory="breadcrumbDirectory" />
     <div class="row m-0">
       <div class="break-word col-10 p-0">
         <TitleText v-if="note && !editTitle" :title="note.name" />
         <textarea
           v-if="editTitle"
           class="form-control title-input"
-          v-model="title"
+          v-model="titleLabel"
         />
       </div>
       <div
@@ -19,11 +19,7 @@
           icon="pencil-alt"
           class="edit-button-icon"
         />
-        <font-awesome-icon
-          v-else
-          icon="times"
-          class="edit-button-icon"
-        />
+        <font-awesome-icon v-else icon="times" class="edit-button-icon" />
       </div>
     </div>
 
@@ -41,6 +37,8 @@ import Breadcrumb from "../../components/breadcrumb/breadcrumb.component.vue";
 import TitleText from "../../components/text/title-text.component.vue";
 import ClassicEditor from "../../ckeditor/classic.editor";
 import { title } from "../../constants/page.constant";
+import noteService from "../../services/note.service";
+import responseHandler from "../../utils/response.handler";
 
 const Note = {
   components: {
@@ -51,44 +49,60 @@ const Note = {
     return {
       editor: ClassicEditor,
       editTitle: false,
-      note: null,
-      title: "Definitionweajfnejfrbejqberjfbejfbeberjnrjiebgverjbnerjbejbgvrj",
+      id: 0,
+      name: "",
       content: "",
+      notebookId: 0,
+      notebookName: "",
+      breadcrumbDirectory: {},
     };
   },
   computed: {
     title() {
       return title.NOTE;
-    }
+    },
   },
   methods: {
     loadNote() {
-      // this.$store.dispatch("spinner/show");
-      // noteService.getById(this.$route.params.id).then(
-      //   response => {
-      //     this.$store.dispatch("spinner/hide");
-      //     responseHandler.handleGetResponse(this.$store, response, (note) => {
-      //       this.note = note;
-      //     })
-      //   }
-      // )
-      this.note = {
-        id: 1,
-        name: "Definitionweajfnejfrbejqberjfbejfbeberjnrjiebgverjbnerjbejbgvrj",
-        content: "Testing",
-        notebookId: 1,
-        notebookName: "Microservices",
-      };
+      this.$store.dispatch("spinner/show");
+      noteService.getById(this.$route.params.id).then(
+        response => {
+          this.$store.dispatch("spinner/hide");
+          responseHandler.handleGetResponse(this.$store, response, (note) => {
+            this.breadcrumbDirectory["Notebook"] = {
+              name: note.notebookName,
+              link: `/collections/${note.notebookId}`
+            };
+          })
+        }
+      )
+      // this.note = {
+      //   id: 1,
+      //   name: "Definitionweajfnejfrbejqberjfbejfbeberjnrjiebgverjbnerjbejbgvrj",
+      //   content: "Testing",
+      //   notebookId: 1,
+      //   notebookName: "Microservices",
+      // };
     },
     toggleEditTitle() {
       this.editTitle = !this.editTitle;
     },
     save() {
-      console.log(this.content);
-    }
+      noteService
+        .create({
+          name: "Testing",
+          content: "<p>Hello</p>",
+          notebookId: 1,
+        })
+        .then((response) => {
+          console.log(response);
+        });
+    },
   },
   created() {
-    this.loadNote();
+    if (!isNaN(Number(this.$route.params.id))) {
+      this.loadNote();
+    }
   },
 };
 
