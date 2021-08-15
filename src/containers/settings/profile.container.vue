@@ -1,7 +1,7 @@
 <template>
   <div v-if="currentUser" class="component-box profile shadow-sm">
-    <Breadcrumb :current="title" />
-    <TitleText :title="title" />
+    <Breadcrumb />
+    <TitleText />
 
     <UserInfo :currentUser="currentUser" />
   </div>
@@ -20,9 +20,6 @@ const Profile = {
     UserInfo
   },
   computed: {
-    title() {
-      return title.PROFILE;
-    },
     currentUser() {
       return this.$store.getters["auth/currentUser"];
     }

@@ -1,7 +1,7 @@
 <template>
   <div class="component-box forgot-password shadow-sm">
-    <Breadcrumb :current="title" />
-    <TitleText :title="title" />
+    <Breadcrumb />
+    <TitleText />
 
     <ForgotPasswordForm :sentEmail="true" @send-email="sendEmail" @verify="verify" />
   </div>
@@ -24,11 +24,6 @@ const ForgotPassword = {
   data() {
     return {
       sentEmail: false,
-    }
-  },
-  computed: {
-    title() {
-      return title.FORGOT_PASSWORD;
     }
   },
   methods: {

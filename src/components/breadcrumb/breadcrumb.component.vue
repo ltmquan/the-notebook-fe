@@ -12,16 +12,28 @@
 </template>
 
 <script>
+import { title } from '../../constants/page.constant';
 import breadcrumbUtil from '../../utils/breadcrumb.util';
 
 const Breadcrumb = {
   props: {
-    current: String,
     directory: Object
   },
   computed: {
     path() {
-      return breadcrumbUtil.generateBreadcrumbPath(this.current, this.directory ? this.directory : {});
+      return breadcrumbUtil.generateBreadcrumbPath(this.routeName, this.directory);
+    },
+    current() {
+      if (this.routeName === 'NOTE') {
+        return this.$store.getters['note/name'];
+      } else if (this.routeName === 'NOTEBOOK') {
+        return this.$store.getters['notebook/name'];
+      } else {
+        return title[this.routeName];
+      }
+    },
+    routeName() {
+      return this.$route.name;
     }
   }
 };

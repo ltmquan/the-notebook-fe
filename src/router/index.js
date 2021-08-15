@@ -14,52 +14,52 @@ const routes = [
   {
     path: '/',
     alias: ['/home'],
-    name: 'Home',
+    name: 'HOME',
     component: Home
   },
   {
     path: '/login',
-    name: 'Login',
+    name: 'LOGIN',
     component: Login
   },
   {
     path: '/signup',
-    name: 'Signup',
+    name: 'SIGNUP',
     component: Signup
   },
   {
     path: '/forgot-password',
-    name: 'Forgot password',
+    name: 'FORGOT_PASSWORD',
     component: ForgotPassword
   },
   {
     path: '/settings',
-    name: 'Settings',
+    name: 'SETTINGS',
     component: Settings
   },
   {
     path: '/settings/profile',
-    name: 'Profile',
+    name: 'PROFILE',
     component: Profile
   },
   {
     path: '/collections',
-    name: 'Collections',
+    name: 'COLLECTIONS',
     component: Collections
   },
   {
     path: '/notebook/:id',
-    name: 'Notebook',
+    name: 'NOTEBOOK',
     component: Notebook
   },
   {
     path: '/notebook/:notebookId/note/:id',
-    name: 'Note',
+    name: 'NOTE',
     component: Note
   },
   {
     path: '/flashcard',
-    name: "Flashcard",
+    name: 'FLASHCARD',
     component: Flashcard
   }
 ]

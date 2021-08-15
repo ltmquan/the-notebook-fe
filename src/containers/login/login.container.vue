@@ -1,7 +1,7 @@
 <template>
   <div class="component-box login shadow-sm">
-    <Breadcrumb :current="title" />
-    <TitleText :title="title" />
+    <Breadcrumb />
+    <TitleText />
 
     <LoginForm @login="login"/>
   </div>
@@ -19,11 +19,6 @@ const Login = {
     TitleText,
     Breadcrumb,
     LoginForm
-  },
-  computed: {
-    title() {
-      return title.LOGIN;
-    }
   },
   methods: {
     login(user) {

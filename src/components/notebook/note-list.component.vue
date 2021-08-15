@@ -22,11 +22,12 @@
 <script>
 const NoteList = {
   props: {
-    notes: Array
+    notes: Array,
+    notebook: Object
   },
   methods: {
     toNote(id) {
-      this.$router.push(`/note/${id}`);
+      this.$router.push(`${this.notebook.id}/note/${id}`);
     },
     addNote() {
       this.$router.push(`/note/add-note`);

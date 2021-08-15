@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-3" @focus="focusInput">
+  <div class="mb-3">
     <label for="" class="form-label">
       {{ label }}
       <span v-if="required" class="text-danger">*</span>
@@ -22,9 +22,6 @@ const TextInput = {
   methods: {
     onInput(event) {
       this.$emit('input', event.target.value);
-    },
-    focusInput() {
-      console.log('yes');
     }
   },
   mounted() {

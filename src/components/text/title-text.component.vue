@@ -3,9 +3,22 @@
 </template>
 
 <script>
+import { title } from "../../constants/page.constant";
+
 const TitleText = {
-  props: {
-    title: String
+  computed: {
+    title() {
+      if (this.routeName === 'NOTE') {
+        return this.$store.getters['note/name'];
+      } else if (this.routeName === 'NOTEBOOK') {
+        return this.$store.getters['notebook/name'];
+      } else {
+        return title[this.routeName];
+      }
+    },
+    routeName() {
+      return this.$route.name;
+    }
   }
 }
 

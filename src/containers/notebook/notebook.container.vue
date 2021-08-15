@@ -1,13 +1,13 @@
 <template>
   <div class="component-box notebook shadow-sm">
-    <Breadcrumb :current="title" />
-    <TitleText class="break-word" v-if="notebook" :title="notebook.name" />
+    <Breadcrumb />
+    <TitleText class="break-word" v-if="notebook" />
 
     <p v-if="notebook" class="fst-italic">
       <span class="fw-bold">Description:</span> {{ notebook.description }}
     </p>
 
-    <NoteList v-if="notes" :notes="notes" />
+    <NoteList v-if="notes && notebook" :notes="notes" :notebook="notebook" />
   </div>
 </template>
 
@@ -31,11 +31,6 @@ const Notebook = {
       notebook: null,
       notes: null,
     };
-  },
-  computed: {
-    title() {
-      return title.NOTEBOOK;
-    }
   },
   methods: {
     loadNotebook() {

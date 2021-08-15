@@ -39,6 +39,10 @@ export const auth = {
             
             return response;
           }
+        ).catch(
+          () => {
+            console.log('server error');
+          }
         );
     },
     updateState({ commit }) {

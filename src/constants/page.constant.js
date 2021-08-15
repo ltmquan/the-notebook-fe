@@ -5,7 +5,6 @@ export const title = {
   COLLECTIONS: "Collections",
   NOTEBOOK: "Notebook",
   NOTE: "Note",
-  ADD_NOTE: "Add note",
   FLASHCARD: "Flashcard",
   SETTINGS: "Settings",
   PROFILE: "Profile",

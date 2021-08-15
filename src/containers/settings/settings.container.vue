@@ -1,7 +1,7 @@
 <template>
   <div class="component-box settings shadow-sm">
-    <Breadcrumb :current="title" />
-    <TitleText :title="title" />
+    <Breadcrumb />
+    <TitleText />
 
     <SettingsOptions />
   </div>
@@ -18,11 +18,6 @@ const Settings = {
     Breadcrumb,
     TitleText,
     SettingsOptions
-  },
-  computed: {
-    title() {
-      return title.SETTINGS;
-    }
   }
 };
 

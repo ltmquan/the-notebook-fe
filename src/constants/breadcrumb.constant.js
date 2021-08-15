@@ -59,7 +59,7 @@ export const appTreeDirectory = {
   FLASHCARD: [0, 1],
   SETTINGS: [0, 2],
   PROFILE: [0, 1, 0],
-  LOG_IN: [1],
+  LOGIN: [1],
   FORGOT_PASSWORD: [1, 0],
-  SIGN_UP: [2],
+  SIGNUP: [2],
 }

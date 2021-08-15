@@ -32,7 +32,7 @@ const CollectionsList = {
   },
   methods: {
     toNotebook(id) {
-      this.$router.push(`/collections/${id}`);
+      this.$router.push(`/notebook/${id}`);
     },
     addNotebook() {
       this.$emit('addNotebook');

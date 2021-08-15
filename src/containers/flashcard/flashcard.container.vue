@@ -1,7 +1,7 @@
 <template>
   <div class="component-box flashcard shadow-sm">
-    <Breadcrumb :current="title" />
-    <TitleText :title="title" />
+    <Breadcrumb />
+    <TitleText />
 
     <FlashcardInfo />
   </div>
@@ -19,11 +19,6 @@ const Flashcard = {
     Breadcrumb,
     FlashcardInfo
   },
-  computed: {
-    title() {
-      return title.FLASHCARD;
-    }
-  }
 }
 
 export default Flashcard;

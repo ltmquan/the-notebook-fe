@@ -1,7 +1,7 @@
 <template>
   <div class="component-box home shadow-sm">
-    <Breadcrumb :current="title" />
-    <TitleText :title="title" />
+    <Breadcrumb />
+    <TitleText />
 
   </div>
 </template>
@@ -15,11 +15,6 @@ const Home = {
   components: {
     Breadcrumb,
     TitleText
-  },
-  computed: {
-    title() {
-      return title.HOME
-    }
   }
 }
 

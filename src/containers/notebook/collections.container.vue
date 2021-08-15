@@ -1,7 +1,7 @@
 <template>
   <div class="component-box collections shadow-sm">
-    <Breadcrumb :current="title" />
-    <TitleText :title="title" />
+    <Breadcrumb />
+    <TitleText />
 
     <CollectionsList
       v-if="notebooks"
@@ -30,11 +30,6 @@ const Collections = {
     return {
       notebooks: null,
     };
-  },
-  computed: {
-    title() {
-      return title.COLLECTIONS;
-    },
   },
   methods: {
     loadNotebooks() {

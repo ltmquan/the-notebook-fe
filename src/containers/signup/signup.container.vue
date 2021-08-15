@@ -1,7 +1,7 @@
 <template>
   <div class="component-box signup shadow-sm">
-    <Breadcrumb :current="title" />
-    <TitleText :title="title" />
+    <Breadcrumb />
+    <TitleText />
 
     <SignupForm @signup="signup" />
   </div>
@@ -20,11 +20,6 @@ const Signup = {
     Breadcrumb,
     TitleText,
     SignupForm
-  },
-  computed: {
-    title() {
-      return title.SIGNUP;
-    }
   },
   methods: {
     signup(user) {
