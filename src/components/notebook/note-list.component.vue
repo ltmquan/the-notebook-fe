@@ -30,7 +30,7 @@ const NoteList = {
       this.$router.push(`${this.notebook.id}/note/${id}`);
     },
     addNote() {
-      this.$router.push(`/note/add-note`);
+      this.$router.push(`${this.notebook.id}/note/new`);
     },
   }
 }

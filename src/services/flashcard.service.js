@@ -9,8 +9,8 @@ class FlashcardService {
     return requestHandler.sendGetRequest(FLASHCARD_URL + '/' + id, authHeader());
   }
 
-  getByNoteId(noteId) {
-    return requestHandler.sendGetRequest(FLASHCARD_URL + '/note/' + noteId, authHeader());
+  getByCurrentUser() {
+    return requestHandler.sendGetRequest(FLASHCARD_URL + '/user', authHeader());
   }
 
   create(flashcard) {

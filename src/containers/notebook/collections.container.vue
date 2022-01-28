@@ -1,24 +1,23 @@
 <template>
-  <div class="component-box collections shadow-sm">
+  <div class='component-box collections shadow-sm'>
     <Breadcrumb />
     <TitleText />
 
     <CollectionsList
-      v-if="notebooks"
-      :notebooks="notebooks"
-      @add-notebook="addNotebook"
+      v-if='notebooks'
+      :notebooks='notebooks'
+      @add-notebook='addNotebook'
     />
   </div>
 </template>
 
 <script>
-import notebookService from "../../services/notebook.service";
-import Breadcrumb from "../../components/breadcrumb/breadcrumb.component.vue";
-import TitleText from "../../components/text/title-text.component.vue";
-import CollectionsList from "../../components/notebook/collections-list.component.vue";
-import AddNotebook from "../../components/modal/add-notebook-form.component.vue";
-import responseHandler from "../../utils/response.handler";
-import { title } from "../../constants/page.constant";
+import notebookService from '../../services/notebook.service';
+import Breadcrumb from '../../components/breadcrumb/breadcrumb.component.vue';
+import TitleText from '../../components/text/title-text.component.vue';
+import CollectionsList from '../../components/notebook/collections-list.component.vue';
+import AddNotebook from '../../components/modal/add-notebook-form.component.vue';
+import responseHandler from '../../utils/response.handler';
 
 const Collections = {
   components: {
@@ -33,9 +32,9 @@ const Collections = {
   },
   methods: {
     loadNotebooks() {
-      this.$store.dispatch("spinner/show");
+      this.$store.dispatch('spinner/show');
       notebookService.getByCurrentUser().then((response) => {
-        this.$store.dispatch("spinner/hide");
+        this.$store.dispatch('spinner/hide');
         responseHandler.handleGetResponse(
           this.$store,
           response,
@@ -46,9 +45,9 @@ const Collections = {
       });
     },
     addNotebook() {
-      this.$store.dispatch("modal/open", {
+      this.$store.dispatch('modal/open', {
         component: AddNotebook,
-        title: "Add notebook",
+        title: 'Add notebook',
         props: {},
         callback: () => {
           this.loadNotebooks();

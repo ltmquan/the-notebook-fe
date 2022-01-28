@@ -11,7 +11,6 @@
 import TitleText from '../../components/text/title-text.component.vue';
 import Breadcrumb from '../../components/breadcrumb/breadcrumb.component.vue';
 import FlashcardInfo from '../../components/flashcard/flashcard-info.component.vue';
-import { title } from '../../constants/page.constant';
 
 const Flashcard = {
   components: {

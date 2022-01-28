@@ -6,9 +6,14 @@
 import { title } from "../../constants/page.constant";
 
 const TitleText = {
+  props: {
+    current: String
+  },
   computed: {
     title() {
-      if (this.routeName === 'NOTE') {
+      if (this.current) {
+        return this.current;
+      } else if (this.routeName === 'NOTE') {
         return this.$store.getters['note/name'];
       } else if (this.routeName === 'NOTEBOOK') {
         return this.$store.getters['notebook/name'];

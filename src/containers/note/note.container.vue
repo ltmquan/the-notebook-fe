@@ -1,54 +1,53 @@
 <template>
-  <div class="component-box note shadow-sm">
-    <Breadcrumb :directory="breadcrumbDirectory" />
-    <div class="row m-0">
-      <div class="title-container break-word col-10 p-0">
-        <TitleText v-if="!editTitle" />
+  <div class='component-box note shadow-sm'>
+    <Breadcrumb :directory='breadcrumbDirectory' />
+    <div class='row m-0'>
+      <div class='title-container break-word col-10 p-0'>
+        <TitleText v-if='!editTitle' :current="name" />
         <textarea
-          v-if="editTitle"
-          class="form-control title-input"
-          v-model="name"
+          v-if='editTitle'
+          rows="2"
+          class='form-control title-input'
+          v-model='name'
         />
       </div>
       <div
-        class="edit-button col-1 p-3 justify-content-center"
-        @click="toggleEditTitle()"
+        class='edit-button col-1 p-3 justify-content-center'
+        @click='toggleEditTitle()'
       >
         <font-awesome-icon
-          v-if="!editTitle"
-          icon="pencil-alt"
-          class="edit-button-icon"
+          v-if='!editTitle'
+          icon='pencil-alt'
+          class='edit-button-icon'
         />
-        <font-awesome-icon v-else icon="times" class="edit-button-icon" />
+        <font-awesome-icon v-else icon='times' class='edit-button-icon' />
       </div>
     </div>
 
     <SelectInput
-      v-if="noteTypes"
-      label="Type"
-      :value="typeId"
-      :options="noteTypesSimplified"
-      @input="typeId = $event.target.value"
+      v-if='noteTypes'
+      label='Type'
+      :value='typeId'
+      :options='noteTypesSimplified'
+      @input='typeId = $event.target.value'
     />
 
-    <div class="text-editor">
-      <ckeditor :editor="editor" v-model="content" />
+    <div class='text-editor'>
+      <ckeditor :editor='editor' v-model='content' />
     </div>
 
-    <button class="btn btn-outline-primary-color" @click="save">Save</button>
+    <button class='btn btn-outline-primary-color' @click='save'>Save</button>
   </div>
 </template>
 
 <script>
-// import noteService from '../services/note.service';
-import Breadcrumb from "../../components/breadcrumb/breadcrumb.component.vue";
-import TitleText from "../../components/text/title-text.component.vue";
-import SelectInput from "../../components/form-input/select-input.component.vue";
-import ClassicEditor from "../../ckeditor/classic.editor";
-import { title } from "../../constants/page.constant";
-import noteService from "../../services/note.service";
-import noteTypeService from "../../services/note-type.service";
-import responseHandler from "../../utils/response.handler";
+import Breadcrumb from '../../components/breadcrumb/breadcrumb.component.vue';
+import TitleText from '../../components/text/title-text.component.vue';
+import SelectInput from '../../components/form-input/select-input.component.vue';
+import ClassicEditor from '../../ckeditor/classic.editor';
+import noteService from '../../services/note.service';
+import noteTypeService from '../../services/note-type.service';
+import responseHandler from '../../utils/response.handler';
 
 const Note = {
   components: {
@@ -61,12 +60,10 @@ const Note = {
       editor: ClassicEditor,
       editTitle: false,
       id: 0,
-      name: "",
-      content: "",
+      name: '',
+      content: '',
       typeId: 0,
-      typeName: "",
-      notebookId: 0,
-      notebookName: "",
+      typeName: '',
       noteTypes: null,
       isCreate: false,
       breadcrumbDirectory: {},
@@ -84,11 +81,11 @@ const Note = {
   },
   methods: {
     loadNote() {
-      this.$store.dispatch("spinner/show");
+      this.$store.dispatch('spinner/show');
       noteService.getById(this.$route.params.id).then((response) => {
-        this.$store.dispatch("spinner/hide");
+        this.$store.dispatch('spinner/hide');
         responseHandler.handleGetResponse(this.$store, response, (note) => {
-          this.breadcrumbDirectory["Notebook"] = {
+          this.breadcrumbDirectory['Notebook'] = {
             name: note.notebookName,
             link: `/notebook/${note.notebookId}`,
           };
@@ -99,20 +96,15 @@ const Note = {
           this.typeName = note.typeName;
           this.notebookId = note.notebookId;
           this.notebookName = note.notebookName;
+
+          this.$store.dispatch('note/set', note);
         });
       });
-      // this.note = {
-      //   id: 1,
-      //   name: "Definitionweajfnejfrbejqberjfbejfbeberjnrjiebgverjbnerjbejbgvrj",
-      //   content: "Testing",
-      //   notebookId: 1,
-      //   notebookName: "Microservices",
-      // };
     },
     loadNoteTypes() {
-      this.$store.dispatch("spinner/show");
+      this.$store.dispatch('spinner/show');
       noteTypeService.getByCurrentUser().then((response) => {
-        this.$store.dispatch("spinner/hide");
+        this.$store.dispatch('spinner/hide');
         responseHandler.handleGetResponse(
           this.$store,
           response,
@@ -126,19 +118,24 @@ const Note = {
       this.editTitle = !this.editTitle;
     },
     save() {
-      this.$store.dispatch("spinner/show");
+      this.$store.dispatch('spinner/show');
+      console.log(this.$store.getters['notebook/id']);
       if (this.isCreate) {
         noteService
           .create({
-            name: "Testing",
-            content: "<p>Hello</p>",
-            notebookId: this.notebookId,
+            name: this.name,
+            content: this.content,
+            notebookId: this.$store.getters['notebook/id'],
           })
           .then((response) => {
-            this.$store.dispatch("spinner/hide");
-            responseHandler.handlePostResponse(this.$store, response, (param) => {
-              this.$router.push(`/notebook/${this.notebookId}`);
-            });
+            this.$store.dispatch('spinner/hide');
+            responseHandler.handlePostResponse(
+              this.$store,
+              response,
+              (param) => {
+                this.$router.push(`/notebook/${this.$store.getters['notebook/id']}`);
+              }
+            );
           });
       } else {
         noteService
@@ -146,13 +143,17 @@ const Note = {
             id: this.id,
             name: this.name,
             content: this.content,
-            notebookId: this.notebookId
+            notebookId: this.$store.getters['notebook/id'],
           })
           .then((response) => {
-            this.$store.dispatch("spinner/hide");
-            responseHandler.handlePutResponse(this.$store, response, (param) => {
-              this.$router.push(`/notebook/${this.notebookId}`);
-            });
+            this.$store.dispatch('spinner/hide');
+            responseHandler.handlePutResponse(
+              this.$store,
+              response,
+              (param) => {
+                this.$router.push(`/notebook/${this.$store.getters['notebook/id']}`);
+              }
+            );
           });
       }
     },
@@ -161,6 +162,7 @@ const Note = {
     if (!isNaN(Number(this.$route.params.id))) {
       this.loadNote();
     } else {
+      this.editTitle = true;
       this.isCreate = true;
     }
   },
